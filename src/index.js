@@ -8,3 +8,5 @@ function component(text) {
 }
 
 document.body.prepend(component('Проект собран на Webpack'));
+
+
