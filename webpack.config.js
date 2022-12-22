@@ -1,12 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require("webpack");
 
 module.exports = {
-        entry: path.join(__dirname, 'src', 'index.js'),
-        output: {
-            path: path.join(__dirname, 'dist'),
-            filename: 'index.[contenthash].js',
+    entry: path.join(__dirname, 'src', 'index.js'),
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'index.[contenthash].js',
     },
 
     module: {
@@ -28,17 +29,23 @@ module.exports = {
         ]
     },
     plugins: [
-            new HtmlWebpackPlugin({
-                template: path.join(__dirname, 'src', 'template.html'),
-                filename: 'index.html',
-            }),
-            new MiniCssExtractPlugin({
-                 filename: '[name].[contenthash].css',
-             }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'src', 'template.html'),
+            filename: 'index.html',
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+        }),
 
-        ],
-        devServer: {
-            watchFiles: path.join(__dirname, 'src'),
-            port: 9000,
+
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "public"),
+        watchFiles: path.join(__dirname, 'src'),
+        compress: true,
+        port: 9000,
+        hot: true,
+        client: false,
+
     },
 };
